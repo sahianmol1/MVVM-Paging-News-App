@@ -7,6 +7,10 @@ import retrofit2.http.Query
 
 interface NewsAPI {
 
+    companion object {
+        const val BASE_URL = "https://newsapi.org"
+    }
+
     @GET("/v2/top-headlines")
     suspend fun getBreakingNews(
         @Query("country") countryCode: String,
