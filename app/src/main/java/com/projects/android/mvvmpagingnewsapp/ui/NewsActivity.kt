@@ -14,6 +14,8 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        bottomNavigationView.setupWithNavController(supportFragmentManager.findFragmentById(R.id.newsNavHostFragment)!!.findNavController())
+        bottomNavigationView.setupWithNavController(
+            supportFragmentManager.findFragmentById(R.id.newsNavHostFragment)!!.findNavController()
+        )
     }
 }
