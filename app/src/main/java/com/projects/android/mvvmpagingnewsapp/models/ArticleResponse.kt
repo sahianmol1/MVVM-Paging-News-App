@@ -3,7 +3,7 @@ package com.projects.android.mvvmpagingnewsapp.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class ArticleResponse(
     @SerializedName("articles")
     val articles: List<Article>,
     @SerializedName("status")
