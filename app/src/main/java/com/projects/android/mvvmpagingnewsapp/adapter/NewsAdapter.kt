@@ -45,14 +45,13 @@ class NewsAdapter : PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(NEWS_
 
     companion object {
         private val NEWS_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+                return true
+            }
+
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
                 return oldItem.url == newItem.url
             }
-
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-                return oldItem == newItem
-            }
-
         }
     }
 }

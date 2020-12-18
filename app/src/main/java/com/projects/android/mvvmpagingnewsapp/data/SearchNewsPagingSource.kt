@@ -6,22 +6,21 @@ import com.projects.android.mvvmpagingnewsapp.models.Article
 import retrofit2.HttpException
 import java.io.IOException
 
-const val NEWS_STARTING_PAGE_INDEX = 1
+const val SEARCH_STARTING_PAGE_INDEX = 1
 
-class NewsPagingSource(
-    private val newsAPI: NewsAPI,
-    private val countryCode: String
-) : PagingSource<Int, Article>() {
+class SearchNewsPagingSource(
+        private val api: NewsAPI,
+        private val query: String
+): PagingSource<Int, Article>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
-        val position = params.key ?: NEWS_STARTING_PAGE_INDEX
-
         return try {
-            val response = newsAPI.getBreakingNews(countryCode, position)
+            val position = params.key ?: SEARCH_STARTING_PAGE_INDEX
+            val response = api.searchNews(query, position)
             val articles = response.articles
             LoadResult.Page(
-                data = articles,
-                prevKey = if (position == NEWS_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = if (articles.isEmpty()) null else position + 1
+                    data = articles,
+                    prevKey = if (position == SEARCH_STARTING_PAGE_INDEX) null else position - 1,
+                    nextKey = if(articles.isEmpty()) null else position + 1
             )
         } catch (e: IOException) {
             LoadResult.Error(e)

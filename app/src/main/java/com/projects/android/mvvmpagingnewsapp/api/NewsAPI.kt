@@ -23,6 +23,6 @@ interface NewsAPI {
         @Query("q") query: String,
         @Query("page") pageNumber: Int,
         @Query("apiKey") apiKey: String = BuildConfig.NEWS_ACCESS_KEY
-    )
+    ): ArticleResponse
 
 }

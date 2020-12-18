@@ -14,9 +14,16 @@ class NewsRepository @Inject constructor(val newsAPI: NewsAPI) {
         Pager(
             config = PagingConfig(
                 pageSize = 20,
-                maxSize = 100,
                 enablePlaceholders = false
             ),
             pagingSourceFactory ={NewsPagingSource(newsAPI, countryCode)}
         ).liveData
+
+    fun searchNews(query: String) = Pager(
+            config = PagingConfig(
+                    pageSize = 20,
+                    enablePlaceholders = false
+            ),
+            pagingSourceFactory = {SearchNewsPagingSource(newsAPI, query)}
+    ).liveData
 }

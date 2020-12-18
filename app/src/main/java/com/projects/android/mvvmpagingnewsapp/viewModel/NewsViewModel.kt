@@ -9,10 +9,16 @@ import com.projects.android.mvvmpagingnewsapp.models.Article
 
 class NewsViewModel @ViewModelInject constructor(val repository: NewsRepository): ViewModel() {
 
-    private val countryCode = "in"
+    private val countryCode = "us"
     lateinit var articles: LiveData<PagingData<Article>>
 
     fun getBreakingNews() {
         articles = repository.getBreakingNews(countryCode)
+    }
+
+    lateinit var searchedArticles: LiveData<PagingData<Article>>
+
+    fun searchNews(query: String) {
+        searchedArticles = repository.searchNews(query)
     }
 }
