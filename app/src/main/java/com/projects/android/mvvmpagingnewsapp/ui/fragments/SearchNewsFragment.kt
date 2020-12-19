@@ -10,12 +10,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.projects.android.mvvmpagingnewsapp.R
 import com.projects.android.mvvmpagingnewsapp.adapter.NewsAdapter
 import com.projects.android.mvvmpagingnewsapp.adapter.NewsLoadStateAdapter
+import com.projects.android.mvvmpagingnewsapp.adapter.OnAdapterItemClickListener
 import com.projects.android.mvvmpagingnewsapp.databinding.FragmentSearchNewsBinding
+import com.projects.android.mvvmpagingnewsapp.models.Article
 import com.projects.android.mvvmpagingnewsapp.ui.NewsActivity
 import com.projects.android.mvvmpagingnewsapp.viewModel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_search_news.*
 
-class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
+class SearchNewsFragment: Fragment(R.layout.fragment_search_news), OnAdapterItemClickListener {
     lateinit var mViewModel: NewsViewModel
     private var _binding : FragmentSearchNewsBinding? = null
     private val binding get() = _binding
@@ -25,7 +27,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         _binding = FragmentSearchNewsBinding.bind(view)
         mViewModel = (activity as NewsActivity).mViewModel
 
-        val mAdapter = NewsAdapter()
+        val mAdapter = NewsAdapter(this)
 
         binding.apply {
 
@@ -57,5 +59,9 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
     override fun onDestroyView() {
         super.onDestroyView()   
         _binding = null
+    }
+
+    override fun onItemClick(article: Article) {
+
     }
 }

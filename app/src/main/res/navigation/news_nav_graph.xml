@@ -9,7 +9,11 @@
         android:id="@+id/articleFragment"
         android:name="com.projects.android.mvvmpagingnewsapp.ui.fragments.ArticleFragment"
         android:label="fragment_article"
-        tools:layout="@layout/fragment_article" />
+        tools:layout="@layout/fragment_article" >
+        <argument
+            android:name="article"
+            app:argType="com.projects.android.mvvmpagingnewsapp.models.Article" />
+    </fragment>
     <fragment
         android:id="@+id/breakingNewsFragment"
         android:name="com.projects.android.mvvmpagingnewsapp.ui.fragments.BreakingNewsFragment"
@@ -17,7 +21,11 @@
         tools:layout="@layout/fragment_breaking_news" >
         <action
             android:id="@+id/action_breakingNewsFragment2_to_articleFragment"
-            app:destination="@id/articleFragment" />
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"

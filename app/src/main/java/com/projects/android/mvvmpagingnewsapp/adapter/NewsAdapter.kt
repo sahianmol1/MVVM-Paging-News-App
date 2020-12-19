@@ -10,7 +10,7 @@ import com.projects.android.mvvmpagingnewsapp.R
 import com.projects.android.mvvmpagingnewsapp.databinding.ItemArticlePreviewBinding
 import com.projects.android.mvvmpagingnewsapp.models.Article
 
-class NewsAdapter : PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(NEWS_COMPARATOR) {
+class NewsAdapter(val listener: OnAdapterItemClickListener) : PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(NEWS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding =
@@ -26,8 +26,21 @@ class NewsAdapter : PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(NEWS_
         }
     }
 
-    class NewsViewHolder(private val binding: ItemArticlePreviewBinding) :
+    inner class NewsViewHolder(private val binding: ItemArticlePreviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if(item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
+
         fun bind(article: Article) {
             binding.apply {
                 Glide.with(itemView)

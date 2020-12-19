@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.projects.android.mvvmpagingnewsapp.R
 import com.projects.android.mvvmpagingnewsapp.adapter.NewsAdapter
 import com.projects.android.mvvmpagingnewsapp.adapter.NewsLoadStateAdapter
+import com.projects.android.mvvmpagingnewsapp.adapter.OnAdapterItemClickListener
 import com.projects.android.mvvmpagingnewsapp.databinding.FragmentBreakingNewsBinding
+import com.projects.android.mvvmpagingnewsapp.models.Article
 import com.projects.android.mvvmpagingnewsapp.ui.NewsActivity
 import com.projects.android.mvvmpagingnewsapp.viewModel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
+class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news), OnAdapterItemClickListener {
 
     //    private val mViewModel by viewModels<NewsViewModel>()
     lateinit var mViewModel: NewsViewModel
@@ -29,7 +32,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
         mViewModel = (activity as NewsActivity).mViewModel
 
         _binding = FragmentBreakingNewsBinding.bind(view)
-        val mAdapter = NewsAdapter()
+        val mAdapter = NewsAdapter(this)
 
         mViewModel.getBreakingNews()
         mViewModel.articles.observe(viewLifecycleOwner) {
@@ -56,5 +59,10 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(article: Article) {
+        val action = BreakingNewsFragmentDirections.actionBreakingNewsFragment2ToArticleFragment(article)
+        findNavController().navigate(action)
     }
 }

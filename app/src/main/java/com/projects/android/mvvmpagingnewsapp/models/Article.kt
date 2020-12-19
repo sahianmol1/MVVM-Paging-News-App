@@ -1,8 +1,11 @@
 package com.projects.android.mvvmpagingnewsapp.models
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
+@Entity(tableName = "article")
 data class Article(
     @SerializedName("author")
     val author: String,
@@ -20,4 +23,4 @@ data class Article(
     val url: String,
     @SerializedName("urlToImage")
     val urlToImage: String
-)
+): Serializable
