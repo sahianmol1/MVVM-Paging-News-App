@@ -12,6 +12,7 @@ import com.projects.android.mvvmpagingnewsapp.models.Article
 
 class NewsAdapter(val listener: OnAdapterItemClickListener) : PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(NEWS_COMPARATOR) {
 
+    var currentPosition :Int? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding =
             ItemArticlePreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,6 +21,7 @@ class NewsAdapter(val listener: OnAdapterItemClickListener) : PagingDataAdapter<
 
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        currentPosition = position
         val currentItem = getItem(position)
         if (currentItem != null) {
             holder.bind(currentItem)
@@ -66,5 +68,9 @@ class NewsAdapter(val listener: OnAdapterItemClickListener) : PagingDataAdapter<
                 return oldItem.url == newItem.url
             }
         }
+    }
+
+    fun currentItem(position: Int) : Article?{
+        return getItem(position)
     }
 }
