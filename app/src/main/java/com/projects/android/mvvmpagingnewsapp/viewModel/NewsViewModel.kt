@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel @ViewModelInject constructor(val repository: NewsRepository): ViewModel() {
 
-    private val countryCode = "us"
+    private val countryCode = "in"
     lateinit var articles: LiveData<PagingData<Article>>
 
     fun getBreakingNews() {

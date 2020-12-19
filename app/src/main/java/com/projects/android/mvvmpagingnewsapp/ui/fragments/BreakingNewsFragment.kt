@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news), OnAdapterItemClickListener {
 
-    //    private val mViewModel by viewModels<NewsViewModel>()
     lateinit var mViewModel: NewsViewModel
 
     private var _binding: FragmentBreakingNewsBinding? = null

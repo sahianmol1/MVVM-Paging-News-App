@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.projects.android.mvvmpagingnewsapp.R
@@ -62,6 +63,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news), OnAdapterItem
     }
 
     override fun onItemClick(article: Article) {
-
+        val action = SearchNewsFragmentDirections.actionSearchNewsFragment2ToArticleFragment(article)
+        findNavController().navigate(action)
     }
 }

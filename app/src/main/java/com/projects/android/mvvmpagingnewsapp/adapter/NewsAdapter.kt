@@ -50,7 +50,7 @@ class NewsAdapter(val listener: OnAdapterItemClickListener) : PagingDataAdapter<
                     .error(R.drawable.ic_error)
                     .into(ivArticleImage)
 
-                tvSource.text = article.source.name
+                tvSource.text = article.source?.name
                 tvDescription.text = article.description
                 tvTitle.text = article.title
                 tvPublishedAt.text = article.publishedAt
